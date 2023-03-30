@@ -10,7 +10,7 @@ namespace AgroEcommerceLibrary.Seller
 {
     public class BALSeller
     {
-        SqlConnection con = new SqlConnection("Data Source=AKASH\\SQLEXPRESS;Initial Catalog=GSTAgroE-Commerce;Integrated Security=True");
+        SqlConnection con = new SqlConnection("Data Source=DESKTOP-RTCHIJF;Initial Catalog=GSTAgroE-Commerce;Integrated Security=True");
 
         public void SellerReg(string SellerCode, string SellerFullName, string BusinessName, int BusinessPinCode, string EmailId, string Password, string MobileNo, string AlternateMobileNo, string Gender, int CityId, int PinCode, DateTime DOB, DateTime RegistrationDate /*string RejectionReason, DateTime SellerApprovalDate,*/ /*int StatusId*/)
         {
