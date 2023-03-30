@@ -1,0 +1,574 @@
+﻿@model AgroEcommerceLibrary.Seller.Seller
+
+@{
+    ViewBag.Title = "Registration";
+    Layout = "~/Views/Shared/Seller_Layout.cshtml";
+}
+<head>
+
+
+
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title> Seller Model</title>
+
+    <!-- Bootstrap -->
+    @*<link href="~/Scripts/Seller_js/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">*@
+    <link href="~/Scripts/Seller_js/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link href="~/Scripts/Seller_js/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="~/Scripts/Seller_js/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="~/Scripts/Seller_js/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- bootstrap-wysiwyg -->
+    <link href="~/Scripts/Seller_js/vendors/google-code-prettify/bin/prettify.min.css" rel="stylesheet">
+    <!-- Select2 -->
+    <link href="~/Scripts/Seller_js/vendors/select2/dist/css/select2.min.css" rel="stylesheet">
+    <!-- Switchery -->
+    <link href="~/Scripts/Seller_js/vendors/switchery/dist/switchery.min.css" rel="stylesheet">
+    <!-- starrr -->
+    <link href="~/Scripts/Seller_js/vendors/starrr/dist/starrr.css" rel="stylesheet">
+    <!-- bootstrap-daterangepicker -->
+    <link href="~/Scripts/Seller_js/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    @*<link href="../build/css/custom.min.css" rel="stylesheet">*@
+    <link href="~/Content/Seller_css/custom.min.css" rel="stylesheet" />
+
+   
+
+</head>
+
+<h2>Registration</h2>
+
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#Country").change(function () {
+            var id = $(this).val();
+            // alert(id)
+            $("#state").empty();
+            $.get("/Seller/State_Bind", { Country_Id: id }, function (data) {
+                // alert("welcome in get")
+                var v = "<option>---Select---</option>";
+                $.each(data, function (i, v1) {
+                    v += "<option value=" + v1.Value + ">" + v1.Text + "</option>";
+                });
+                $("#state").html(v);
+                /*$("#state").select2();*/
+            });
+        });
+        $("#state").change(function () {
+            var id = $(this).val();
+            // alert(id)
+            $("#CityId").empty();
+            $.get("/Seller/City_Bind", { State_Id: id }, function (data) {
+                // alert("welcome in get")
+                var v = "<option>---Select---</option>";
+                $.each(data, function (i, v1) {
+                    v += "<option value=" + v1.Value + ">" + v1.Text + "</option>";
+                });
+                $("#CityId").html(v);
+               /* $("#CityId").select2();*/
+            });
+        });
+
+
+    });
+</script>
+
+
+
+
+
+
+@using (Html.BeginForm("Registration", "Seller", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <!-----new form-->
+    <div class="clearfix"></div>
+    <div class="row" style="margin-left:300px">
+        <div class="col-md-12 col-sm-12 ">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Seller Regitration </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a class="dropdown-item" href="#">Settings 1</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">Settings 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <br />
+                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+
+
+                        <!-----Left form-->
+                        <div class="col-md-6 ">
+                            <div class="x_panel">
+                                <div class="x_title">
+
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                    <br />
+
+
+                                    <div class="item form-group ">
+                                        @Html.LabelFor(model => model.SellerFullName, htmlAttributes: new { @class = "col-form-label col-md-3 col-sm-3 label-align required" })
+
+                                        @*<div class="col-md-4 col-sm-4">
+                                                @Html.EditorFor(model => model.SellerFullName, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.SellerFullName, "", new { @class = "text-danger", required = "required" })
+                                            </div>*@
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <input type="text" id="SellerFullName" name="SellerFullName" required="required" class="form-control">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="item form-group">
+                                        @Html.LabelFor(model => model.BusinessName, htmlAttributes: new { @class = "col-form-label col-md-3 col-sm-3 label-align required" })
+
+                                        @*<div class="col-md-4 col-sm-4">
+                                                @Html.EditorFor(model => model.BusinessName, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.BusinessName, "", new { @class = "text-danger", required = "required" })
+                                            </div>*@
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <input type="text" id="BusinessName" name="BusinessName" required="required" class="form-control">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="item form-group">
+                                        @Html.LabelFor(model => model.BusinessPinCode, htmlAttributes: new { @class = "col-form-label col-md-3 col-sm-3 label-align required" })
+
+                                        @*<div class="col-md-4 col-sm-4 ">
+                                                @Html.EditorFor(model => model.BusinessPinCode, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.BusinessPinCode, "", new { @class = "text-danger", required = "required" })
+                                            </div>*@
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <input type="text" id="BusinessPinCode" name="BusinessPinCode" required="required" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group">
+                                        @Html.LabelFor(model => model.EmailId, htmlAttributes: new { @class = "col-form-label col-md-3 col-sm-3 label-align required" })
+
+                                        @*<div class="col-md-4 col-sm-4 ">
+                                                @Html.EditorFor(model => model.EmailId, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.EmailId, "", new { @class = "text-danger", required = "required" })
+                                            </div>*@
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <input type="text" id="EmailId" name="EmailId" required="required" class="form-control">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="item form-group">
+                                        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "col-form-label col-md-3 col-sm-3 label-align required" })
+
+                                        @*<div class="col-md-4 col-sm-4 ">
+                                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger", required = "required" })
+                                            </div>*@
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <input type="text" id="Password" name="Password" required="required" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group">
+                                        @Html.LabelFor(model => model.MobileNo, htmlAttributes: new { @class = "col-form-label col-md-3 col-sm-3 label-align required" })
+
+                                        @*<div class="col-md-4 col-sm-4 ">
+                                                @Html.EditorFor(model => model.MobileNo, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.MobileNo, "", new { @class = "text-danger", required = "required" })
+                                            </div>*@
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <input type="text" id="MobileNo" name="MobileNo" required="required" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group">
+                                        @Html.LabelFor(model => model.AlternateMobileNo, htmlAttributes: new { @class = "col-form-label col-md-3 col-sm-3 label-align required" })
+
+                                        @*<div class="col-md-4 col-sm-4 ">
+                                                @Html.EditorFor(model => model.AlternateMobileNo, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.AlternateMobileNo, "", new { @class = "text-danger", required = "required" })
+                                            </div>*@
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <input type="text" id="AlternateMobileNo" name="AlternateMobileNo" required="required" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group">
+                                        @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "col-form-label col-md-3 col-sm-3 label-align required" })
+                                        <div id="gender" class="btn-group" data-toggle="buttons">
+                                            <label class="btn btn-secondary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                                <input type="radio" name="gender" value="male" class="join-btn flat"> &nbsp; Male &nbsp;
+                                            </label>
+                                            <label style="margin-left:10px" class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                                <input type="radio" name="gender" value="female" class="join-btn flat"> Female
+                                            </label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="item form-group">
+                                        @Html.LabelFor(model => model.CountryName, htmlAttributes: new { @class = "col-form-label col-md-3 col-sm-3 label-align required" })
+                                        <div class="col-md-6 col-sm-6">
+
+                                            @Html.DropDownList("Country", null, "---select Country-----", new { @class = "form-control" })
+                                            @*<select id="Country">-----select state---</select>*@
+                                            @Html.ValidationMessageFor(model => model.CountryName, "", new { @class = "text-danger", required = "required" })
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group">
+                                        @Html.LabelFor(model => model.StateName, htmlAttributes: new { @class = "col-form-label col-md-3 col-sm-3 label-align required" })
+                                        <div class="col-md-6 col-sm-6">
+                                            @*@Html.DropDownList("StateName", null, "---select State-----")*@
+                                            <select id="state" class="form-control">-----select state---</select>
+
+                                            @Html.ValidationMessageFor(model => model.StateName, "", new { @class = "text-danger", required = "required" })
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class=" item form-group">
+                                        @Html.LabelFor(model => model.CityId, "CityName", htmlAttributes: new { @class = "col-form-label col-md-3 col-sm-3 label-align required" })
+                                        <div class="col-md-6 col-sm-6">
+
+                                            @*@Html.DropDownList("CityId", null, htmlAttributes: new { @class = "form-control city" })*@
+                                            <select id="CityId" name="CityId" class="form-control">-----select city---</select>
+
+                                            @Html.ValidationMessageFor(model => model.CityId, "", new { @class = "text-danger", required = "required" })
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group">
+                                        @Html.LabelFor(model => model.DOB, htmlAttributes: new { @class = "col-form-label col-md-3 col-sm-3 label-align required" })
+
+                                        <div class="col-md-6 col-sm-6 ">
+                                            @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger", required = "required" })
+                                        </div>
+
+
+                                    </div>
+                                    <div class="item form-group">
+                                        @Html.LabelFor(model => model.PinCode, htmlAttributes: new { @class = "col-form-label col-md-3 col-sm-3 label-align required" })
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <input type="text" id="PinCode" name="PinCode" required="required" class="form-control">
+                                        </div>
+
+                                    </div>
+                                    <div class="item form-group">
+                                        @Html.LabelFor(model => model.GSTIN, htmlAttributes: new { @class = "col-form-label col-md-3 col-sm-3 label-align required" })
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <input type="text" id="GSTIN" name="GSTIN" required="required" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-----left form-->
+                        <!-----Right form-->
+
+                        <div class="col-md-6 ">
+                            <div class="x_panel">
+                                <div class="x_title">
+
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                    <br />
+
+
+                                    <div class="item form-group">
+                                        @Html.LabelFor(model => model, " Seller Image", htmlAttributes: new { @class = "col-form-label col-md-3 col-sm-3 label-align required" })
+                                        <div class="col-md-4 col-sm-4">
+                                            <button class="mybtn" style="positon:center;">
+
+                                                <img id="Img" src="" alt="Photo" width="110" height="120" style="border:1px;margin-top:10px;margin-left:20px;" class="rounded-circle" />
+                                                <i class="fa fa-upload "></i>Photo Upload
+
+
+                                                <input type="file" id="File" name="Photo" onchange="document.getElementById('Img').src = window.URL.createObjectURL(this.files[0])" />
+                                                @*@Html.ValidationMessageFor(model => model.Photo, "", new { @class = "text-danger" })*@
+                                            </button>
+
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="item form-group">
+                                        @Html.LabelFor(model => model.AadharNo, htmlAttributes: new { @class = "col-form-label col-md-3 col-sm-3 label-align required" })
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <input type="text" id="AadharNo" name="AadharNo" required="required" class="form-control">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="item form-group  form-group row form-horizontal form-label-Right">
+                                        @Html.LabelFor(model => model.AadharImage, htmlAttributes: new { @class = "col-form-label col-md-3 col-sm-3 label-align required" })
+                                        <div class="col-md-6 col-sm-6">
+                                            <button class="mybtn" style="positon:center;">
+                                                <i class="fa fa-upload"></i>Aadhaar Upload
+
+
+                                                <input type="file" id="File" name="AdharImage" onchange="document.getElementById('AU').src = window.URL.createObjectURL(this.files[0])" />
+                                                @Html.ValidationMessageFor(model => model.AadharImage, "", new { @class = "text-danger" })
+                                            </button>
+                                            @*<img id="AU" src="" alt="Aadhaar" width="100" height="50" style="border:1px;margin-top:20px;margin-left:25px;" />*@
+
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group">
+                                        @Html.LabelFor(model => model.PanCardNo, htmlAttributes: new { @class = "col-form-label col-md-3 col-sm-3 label-align required" })
+
+                                        @*<div class="col-md-4 col-sm-4 ">
+                                                @Html.EditorFor(model => model.PanCardNo, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.PanCardNo, "", new { @class = "text-danger", required = "required" })
+                                            </div>*@
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <input type="text" id="PanCardNo" name="PanCardNo" required="required" class="form-control">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="item form-group">
+                                        @Html.LabelFor(model => model.PanImage, htmlAttributes: new { @class = "col-form-label col-md-3 col-sm-3 label-align required" })
+                                        <div class="col-md-6 col-sm-6">
+                                            <button class="mybtn" style="positon:center;">
+                                                <i class="fa fa-upload"></i>PanCard Upload
+
+
+                                                <input type="file" id="File" name="Pancard" onchange="document.getElementById('PU').src = window.URL.createObjectURL(this.files[0])" />
+                                                @Html.ValidationMessageFor(model => model.PanImage, "", new { @class = "text-danger" })
+                                            </button>
+                                            @*<img id="PU" src="" alt="PanImage" width="150" height="100" style="border:1px;margin-top:20px;margin-left:25px;" />*@
+
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group">
+                                        @Html.LabelFor(model => model.BusinessAadharNo, htmlAttributes: new { @class = "col-form-label col-md-3 col-sm-3 label-align required" })
+
+                                        @*<div class="col-md-4 col-sm-4">
+                                                @Html.EditorFor(model => model.BusinessAadharNo, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.BusinessAadharNo, "", new { @class = "text-danger", required = "required" })
+                                            </div>*@
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <input type="text" id="BusinessAadharNo" name="BusinessAadharNo" required="required" class="form-control">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="item form-group">
+                                        @Html.LabelFor(model => model.BusinessAdharImage, htmlAttributes: new { @class = "col-form-label col-md-3 col-sm-3 label-align required" })
+                                        <div class="col-md-6 col-sm-6">
+                                            <button class="mybtn" style="positon:center;">
+                                                <i class="fa fa-upload"></i> Business Aadhaar Upload
+
+
+                                                <input type="file" id="File" name="businessAdhar" onchange="document.getElementById('BAU').src = window.URL.createObjectURL(this.files[0])" />
+                                                @Html.ValidationMessageFor(model => model.BusinessAdharImage, "", new { @class = "text-danger" })
+                                            </button>
+                                            @*<img id="BAU" src="" alt="BusinessAdharImage" width="150" height="100" style="border:1px;margin-top:20px;margin-left:25px;" />*@
+
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group">
+                                        @Html.LabelFor(model => model.BusinessPanNo, htmlAttributes: new { @class = "col-form-label col-md-3 col-sm-3 label-align required" })
+
+                                        @*<div class="col-md-4 col-sm-4">
+                                                @Html.EditorFor(model => model.BusinessPanNo, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.BusinessPanNo, "", new { @class = "text-danger", required = "required" })
+                                            </div>*@
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <input type="text" id="BusinessPanNo" name="BusinessPanNo" required="required" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group">
+                                        @Html.LabelFor(model => model.BusinessPanImage, htmlAttributes: new { @class = "col-form-label col-md-3 col-sm-3 label-align required" })
+                                        <div class="col-md-6 col-sm-6">
+                                            <button class="mybtn" style="positon:center;">
+                                                <i class="fa fa-upload"></i> Business PanCard Upload
+
+
+                                                <input type="file" id="File" name="BusinessPan" onchange="document.getElementById('BPU').src = window.URL.createObjectURL(this.files[0])" />
+                                                @Html.ValidationMessageFor(model => model.BusinessPanImage, "", new { @class = "text-danger" })
+                                            </button>
+                                            @*<img id="BPU" src="" alt="BusinessPanImage" width="150" height="100" style="border:1px;margin-top:20px;margin-left:25px;" />*@
+
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group">
+                                        @Html.LabelFor(model => model.Home, "Home Address", htmlAttributes: new { @class = "col-form-label col-md-3 col-sm-3 label-align required" })
+
+                                        @*<div class="col-md-4 col-sm-4">
+                                                @Html.EditorFor(model => model.Home, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Home, "", new { @class = "text-danger", required = "required" })
+                                            </div>*@
+
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <input type="text" id="Home" name="Home" required="required" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group">
+                                        @Html.LabelFor(model => model.Office, "Office Address", htmlAttributes: new { @class = "col-form-label col-md-3 col-sm-3 label-align required" })
+
+                                        @*<div class="col-md-4 col-sm-4">
+                                                @Html.EditorFor(model => model.Office, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Office, "", new { @class = "text-danger", required = "required" })
+                                            </div>*@
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <input type="text" id="Office" name="Office" required="required" class="form-control">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="item form-group">
+                                        @Html.LabelFor(model => model.Other, htmlAttributes: new { @class = "col-form-label col-md-3 col-sm-3 label-align required" })
+
+                                        @*<div class="col-md-4 col-sm-4">
+                                                @Html.EditorFor(model => model.Other,"Other Address", new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Other, "", new { @class = "text-danger", required = "required" })
+                                            </div>*@
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <input type="text" id="Other" name="Other" required="required" class="form-control">
+                                        </div>
+
+                                    </div>
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-----Right form-->
+                        <div class="col-md-12 col-sm-12 ">
+                            <div class="x_panel">
+                                <div class="x_title">
+
+
+                                    <div class="ln_solid"></div>
+                                    <div class="item form-group" style=" align-content:center">
+                                        <div class="col-md-6 col-sm-6 offset-md-3">
+                                            @*<button class="btn btn-primary" type="button">Cancel</button>*@
+                                            <button class="btn btn-primary" type="reset" style="align-content:center">Cancel</button>
+
+                                            <input type="submit" value="Save" class="btn btn-primary" style="align-content:center" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!---- end new form-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- jQuery -->
+    @*<script src="~/Scripts/Seller_js/vendors/jquery/dist/jquery.min.js"></script>*@
+    <script src="~/Scripts/Seller_js/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="~/Scripts/Seller_js/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- FastClick -->
+    <script src="~/Scripts/Seller_js/vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="~/Scripts/Seller_js/vendors/nprogress/nprogress.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="~/Scripts/Seller_js/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="~/Scripts/Seller_js/vendors/iCheck/icheck.min.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="~/Scripts/Seller_js/vendors/moment/min/moment.min.js"></script>
+    <script src="~/Scripts/Seller_js/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- bootstrap-wysiwyg -->
+    <script src="~/Scripts/Seller_js/vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
+    <script src="~/Scripts/Seller_js/vendors/jquery.hotkeys/jquery.hotkeys.js"></script>
+    <script src="~/Scripts/Seller_js/vendors/google-code-prettify/src/prettify.js"></script>
+    <!-- jQuery Tags Input -->
+    <script src="~/Scripts/Seller_js/vendors/jquery.tagsinput/src/jquery.tagsinput.js"></script>
+    <!-- Switchery -->
+    <script src="~/Scripts/Seller_js/vendors/switchery/dist/switchery.min.js"></script>
+    <!-- Select2 -->
+    <script src="~/Scripts/Seller_js/vendors/select2/dist/js/select2.full.min.js"></script>
+    <!-- Parsley -->
+    <script src="~/Scripts/Seller_js/vendors/parsleyjs/dist/parsley.min.js"></script>
+    <!-- Autosize -->
+    <script src="~/Scripts/Seller_js/vendors/autosize/dist/autosize.min.js"></script>
+    <!-- jQuery autocomplete -->
+    <script src="~/Scripts/Seller_js/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
+    <!-- starrr -->
+    <script src="~/Scripts/Seller_js/vendors/starrr/dist/starrr.js"></script>
+    <!-- Custom Theme Scripts -->
+    @*<script src="../build/js/custom.min.js"></script>*@
+    <script src="~/Scripts/Seller_js/custom.min.js"></script>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Registration")
+</div>
