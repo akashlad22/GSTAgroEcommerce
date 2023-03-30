@@ -1,0 +1,102 @@
+﻿ @model AgroEcommerceLibrary.Buyer.Buyer
+
+@{
+    ViewBag.Title = "SearchProducts";
+    Layout = "~/Views/Shared/Buyer_Layout.cshtml";
+}
+
+
+
+<div class="title-all text-center">
+    <h2>Search Products</h2>
+</div>
+<!--<p>-->
+    @*@using (Html.BeginForm("SearchProducts", "Buyer", FormMethod.Get))*@
+    <!--{-->
+        @*<input type="text" name="prosearch" />
+            <input type="submit" value="Search" name="Submit" />*@
+        <!--<div class="top-search">
+            <div class="container">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    <input type="text" class="form-control" name="prosearch" placeholder="Search" id="Search">-->
+                    @*<input type="submit" value="Search" name="Submit" style="background-color:yellowgreen" />*@
+                    <!--<span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+                </div>
+            </div>
+        </div>
+    }
+</p>-->
+
+<div class="products-box">
+    <div class="container">
+        <div class="row special-list">
+            @if (Model == null)
+
+            {
+                @Url.Action("Index", "Buyer")
+            }
+            else
+            {
+                foreach (var item in Model.products)
+                {
+
+                    <div class="Search col-lg-3 col-md-6 special-grid best-seller">
+                        <div class="products-single fix">
+                            <div class="box-img-hover">
+                                <div class="type-lb">
+                                    <p class="sale">Sale</p>
+                                </div>
+                                <img class="img-fluid" style="width:325px; height:250px" src="@Url.Content(item.MainImage)" alt="Image">
+                                <div class="mask-icon">
+                                    <ul>
+                                        <li><a href="@Url.Action("ShowProdDetails","Buyer",new { productcode = item.ProductCode })" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                    </ul>
+                                    <a class="cart" href="#">Add to Cart</a>
+                                </div>
+                            </div>
+                            <div class="why-text">
+                                <h4>@item.ProductName</h4>
+                                <h5> ₹@item.MRP</h5>
+                            </div>
+                        </div>
+                    </div>
+
+
+                }
+            }
+        </div>
+
+    </div>
+
+</div>
+
+<script src="~/Scripts/Buyer_js/jquery-1.10.2.min.js"></script>
+<script>
+
+
+    $(document).ready(function () {
+
+        function Contains(text_one, text_two) {
+
+            if (text_one.indexOf(text_two) != -1)
+
+                return true;
+        }
+        $("#Search").keyup(function () {
+
+            var searchText = $("#Search").val().toLowerCase();
+            $(".Search").each(function () {
+                if (Contains($(this).text().toLowerCase(), searchText)) {
+                    $(this).hide();
+                }
+                else {
+                    $(this).show();
+                }
+            });
+        });
+    });
+
+</script>
