@@ -1,0 +1,368 @@
+﻿@model AgroEcommerceLibrary.Buyer.Buyer
+
+@{
+    ViewBag.Title = "WishListGrid";
+    Layout = "~/Views/Shared/Buyer_Layout.cshtml";
+}
+
+<h2></h2>
+
+<p>
+    @Html.ActionLink("WishList", "Create")
+</p>
+<div class="wishlist-box-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="table-main table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Images</th>
+                                <th>Product Name</th>
+                                <th>Unit Price </th>
+                                <th>Stock</th>
+                                <th>Add Item</th>
+                                <th>Remove</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in Model.ListUser)
+                            {
+
+                                <tr>
+                                    @*<th>
+                                            @Html.DisplayNameFor(model => model.BuyerCode)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.ByuerFullName)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.EmailId)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Password)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MobileNo)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.AlternaterMobileNo)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.CityId)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.DOB)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Gender)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.AadhaarNo)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.PanCardNo)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.AadhaarPhoto)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.PanCardPhoto)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Salary)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.RegistrationDate)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.OrderId)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.OrderNo)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MyProperty)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.ProductCode)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.ProductQuantity)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.AddressId)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.OrderStatusId)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.ProcessDate)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.ShippingCharges)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.IsDelete)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.ShareId)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.IsNotify)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.ExpectedDeliveryDate)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.RejectedByUserCode)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.RejectionReason)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.PaymentId)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.PaymentMode)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.PaymentDate)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.StatusId)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.TransactionId)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.InvoiceNo)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.WalletId)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.RewardId)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.TotalRewardPoints)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.UseedRewardPoints)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.CouponCode)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.ReviewId)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.RatingStarNo)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.FeedbackOnProduct)
+                                        </th>*@
+
+                                    @*<th>
+                                            @Html.DisplayNameFor(model => model.ProductName)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MRP)
+                                        </th>
+                                        <th></th>*@
+                                </tr>
+
+
+
+
+
+                                @*<td>
+                                        @Html.DisplayFor(modelItem => item.BuyerCode)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ByuerFullName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EmailId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Password)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MobileNo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AlternaterMobileNo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CityId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DOB)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Gender)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AadhaarNo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PanCardNo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AadhaarPhoto)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PanCardPhoto)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Salary)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.RegistrationDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.OrderId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.OrderNo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MyProperty)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ProductCode)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ProductQuantity)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AddressId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.OrderStatusId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ProcessDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ShippingCharges)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IsDelete)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ShareId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IsNotify)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ExpectedDeliveryDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.RejectedByUserCode)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.RejectionReason)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PaymentId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PaymentMode)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PaymentDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.StatusId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TransactionId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.InvoiceNo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.WalletId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.RewardId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TotalRewardPoints)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UseedRewardPoints)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CouponCode)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ReviewId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.RatingStarNo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FeedbackOnProduct)
+                                    </td>*@
+
+                                <tr>
+
+
+                                    <td>
+                                        @*@Html.DisplayFor(modelItem => item.ProductCode)*@
+                                        <input type="hidden" name="ProductCode" />
+
+                                    </td>
+
+
+                                    <td class="thumbnail-img">
+                                        <a @*href="@Url.Action("ADDCart", "Buyer", new {id=item.MainImage})"*@>
+                                            <img class="img-fluid rounded-circle" src="~/Content/Images/DocImages/@item.MainImage" height="100" width="100" />
+                                        </a>
+                                    </td>
+
+
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ProductName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MRP)
+                                    </td>
+                                    <td>
+                                        In Stock
+                                    </td>
+
+                                    <td class="add-pr">
+                                        <a class="btn hvr-hover" href="@Url.Action("ADDCart", "Buyer", new {id=item.ProductCode})">Add to Cart</a>
+                                    </td>
+                                    <td>
+                                        @*@Html.ActionLink("Edit", "Edit", new { id = item.BuyerId }) |
+                                            @Html.ActionLink("Details", "Details", new { id = item.BuyerId }) |*@
+                                        <i class="btn hvr-hover add-pr">
+                                            @Html.ActionLink("Delete", "Delete", new { id = item.ProductCode }, new { onclick = "return confirm('Are You Sure,You want to Delete');" })
+                                        </i>
+                                    </td>
+
+
+
+                                    @*<td class="add-pr">
+                                            <a class="btn hvr-hover" href="@Url.Action("DeleteWishlist", "Buyer", new {id=item.ProductCode})">Remove</a>
+                                        </td>*@
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

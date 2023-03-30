@@ -15,6 +15,8 @@ namespace GSTAgroEcommerce.Controllers
 {
     public class BuyerController : Controller
     {
+        string BuyerCode = "B011";
+        string Code;
         BALBuyer obj = new BALBuyer();
         SqlConnection con = new SqlConnection("Data Source=AKASH\\SQLEXPRESS;Initial Catalog=GSTAgroE-Commerce;Integrated Security=True");
         // GET: Buyer
@@ -385,6 +387,49 @@ namespace GSTAgroEcommerce.Controllers
         //    return Json(prodlist,JsonRequestBehavior.AllowGet);
         //}
 
+        public ActionResult WishListGrid()
+        {
+
+
+            BALBuyer objUser = new BALBuyer();
+            DataSet ds = new DataSet();
+            ds = objUser.WishList(BuyerCode);
+            Buyer objDetails = new Buyer();
+            List<Buyer> LstUserDt1 = new List<Buyer>();
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                Buyer obj = new Buyer();
+
+                obj.MainImage = (ds.Tables[0].Rows[i]["MainImage"].ToString());
+                obj.ProductCode = (ds.Tables[0].Rows[i]["ProductCode"].ToString());
+                obj.ProductName = (ds.Tables[0].Rows[i]["ProductName"].ToString());
+                obj.MRP = Convert.ToInt32(ds.Tables[0].Rows[i]["MRP"].ToString());
+
+                LstUserDt1.Add(obj);
+
+            }
+            objDetails.ListUser = LstUserDt1;
+
+            return View(objDetails);
+        }
+
+        public ActionResult ADDCart(string id)
+        {
+
+            BALBuyer obj = new BALBuyer();
+            obj.AddCart(BuyerCode, id);
+            return RedirectToAction("WishListGrid");
+        }
+        [HttpGet]
+        public ActionResult Delete(Buyer obj, string id)
+        {
+            obj.Isdelete = 1;
+
+            BALBuyer obj1 = new BALBuyer();
+            obj1.DeleteWishlist(id, obj.Isdelete);
+            return RedirectToAction("WishListGrid");
+            // ViewBag.message("Delete sucessfulluy");
+        }
     }
 
 
@@ -409,5 +454,6 @@ namespace GSTAgroEcommerce.Controllers
     //}
 
 
-
+    ///----------Indrajeer-------------------//
+        
 }

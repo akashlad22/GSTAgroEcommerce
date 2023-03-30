@@ -131,8 +131,23 @@ namespace AgroEcommerceLibrary.Buyer
         public string SubCategory3Name { get; set; }
         public string SubCategory3Code { get; set; }
 
-       
 
+        // Add Indrajeet//
+        ////RatingAndFeedback
+        //public int ReviewId { get; set; }
+        //public int RatingStarNo { get; set; }
+        //public string FeedbackOnProduct { get; set; }
+        public List<Buyer> ListUser { get; set; }
+        //public float MRP { get; set; }
+        //public string ProductName { get; set; }
+        //public int ProductId { get; set; }
+
+        public int ProductImageId { get; set; }
+        //public string MainImage { get; set; }
+        //public string Image1 { get; set; }
+        public string Image2 { get; set; }
+        public string Image3 { get; set; }
+        public int Isdelete { get; set; }
 
 
 
