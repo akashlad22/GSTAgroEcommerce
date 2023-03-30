@@ -231,5 +231,49 @@ namespace AgroEcommerceLibrary.Buyer
 
 
         }
+
+        //-------------------Indrajeet----------------------//
+        public DataSet WishList(string BuyerCode)
+        {
+            con.Open();
+            SqlCommand cmd = new SqlCommand("SPAgroBuyer", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Flag", "WishList");
+            cmd.Parameters.AddWithValue("@BuyerCode", BuyerCode);
+            SqlDataAdapter adpt = new SqlDataAdapter();
+            adpt.SelectCommand = cmd;
+            DataSet ds = new DataSet();
+            adpt.Fill(ds);
+            return ds;
+
+            con.Close();
+        }
+        public void AddCart(string BuyerCode, string ProductCode)
+        {
+            con.Open();
+            SqlCommand cmd = new SqlCommand("SPAgroBuyer", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Flag", "Cart");
+            cmd.Parameters.AddWithValue("@BuyerCode", BuyerCode);
+            cmd.Parameters.AddWithValue("@ProductCode", ProductCode);
+            cmd.ExecuteNonQuery();
+            con.Close();
+
+
+
+
+        }
+        public void DeleteWishlist(string ProductCode, int Isdelete)
+        {
+            con.Open();
+            SqlCommand cmd = new SqlCommand("SPAgroBuyer", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Flag", "RemoveWishList");
+            cmd.Parameters.AddWithValue("@ProductCode", ProductCode);
+            cmd.Parameters.AddWithValue("@IsDelete", Isdelete);
+            cmd.ExecuteNonQuery();
+            con.Close();
+
+        }
     }
 }
