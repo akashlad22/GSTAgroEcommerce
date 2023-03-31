@@ -384,6 +384,7 @@
     <Content Include="Views\Buyer\_ShowCategoeryProducts.cshtml" />
     <Content Include="Views\Buyer\Login.cshtml" />
     <Content Include="Views\Buyer\ShowProdDetails.cshtml" />
+    <Content Include="Views\Buyer\ViewCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
